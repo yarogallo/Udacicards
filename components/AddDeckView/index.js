@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-n
 import TextButton from '../TextButton';
 import { 
 	green,
-	blue
+	blue,
+	light
  } from '../../helper/colors';
 
 class AddDeckView extends Component {
@@ -55,7 +56,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'stretch',
-		padding: 15
+		padding: 15,
+		backgroundColor: light
 	},
 	text: {
 		color: green,
@@ -75,7 +77,8 @@ const styles = StyleSheet.create({
 	},
 	submitBtn: {
 		backgroundColor: blue,
-		borderColor: blue
+		borderColor: blue,
+		width: 200
 	},
 	textBtn: {
 		color: green

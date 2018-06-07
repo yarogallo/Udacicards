@@ -10,23 +10,22 @@ import { light, green } from '../../helper/colors';
 
 const styles = StyleSheet.create({
 	header: {
-	  backgroundColor: green,
-	  paddingTop: 20,                                                                                                                
+	  backgroundColor: green,                                                                                                                
 	  paddingLeft: 15,
+	},
+	iconStyle: {
+		paddingRight: 10,
+	  paddingLeft: 15
 	}
   });
   
 function HeaderImg(props) {
-	const style = {
-	  paddingRight: 10,
-	  paddingLeft: 15
-	};
 	return(
 	  <Ionicons 
 		name={Platform.OS === 'ios' ? 'ios-arrow-back' : 'md-arrow-back'} 
 		size={30} 
 		color={props.tintColor}
-		style={style}/>
+		style={styles.iconStyle}/>
 	);
   }
   
@@ -46,13 +45,13 @@ function HeaderImg(props) {
   }, {
 	initialRouteName: 'Home',
 	navigationOptions: {
-	  headerBackImage: <HeaderImg tintColor={green}/>,
+	  headerBackImage: () =>  <HeaderImg tintColor={green}/>,
 	  headerStyle: {
 		backgroundColor: light,
 		height: 60,
 		shadowColor: green,
 		shadowOffset: {
-		  width: 2,
+		  width: 0,
 		  height: 2
 		},
 		shadowOpacity: 0.2,

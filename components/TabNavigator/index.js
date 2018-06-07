@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import AddDeckView from '../AddDeckView';
 import DeckListView from '../DeckListView';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { red, yellow, green } from '../../helper/colors';
+import { red, yellow, green, light } from '../../helper/colors';
 
  const TabNavigator = createMaterialTopTabNavigator({
 	Home: {
@@ -24,10 +24,16 @@ import { red, yellow, green } from '../../helper/colors';
 	tabBarPosition: 'top',
 	tabBarOptions: {
 		initialRouteName: 'Home',
-		activeTintColor: yellow,
+		activeTintColor: red,
+		inactiveTintColor: green,
+		showIcon: false,
+		labelStyle: {
+			fontSize: 20,
+			fontWeight: 'bold',
+		},
 		style: {
 			height: 60,
-			backgroundColor: red,
+			backgroundColor: light,
 			shadowColor: green,
 			shadowOffset: {
 				width: 0,
