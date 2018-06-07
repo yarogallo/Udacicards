@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckListView from './components/DeckListView';
 import DeckView from './components/DeckView';
+import AddDeckView from './components/AddDeckView';
 
 const data = [
 	{title: 'react', nroCards: 20},
@@ -14,7 +15,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <DeckView />
+        <AddDeckView />
       </View>
     );
   }

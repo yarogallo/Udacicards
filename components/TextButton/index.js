@@ -4,7 +4,9 @@ import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 function DeckView(props) {
 	const { text, onPress, styleBtn, styleTextBtn } = props;
 	return(
-		<TouchableOpacity style={[styles.button, styleBtn]}>
+		<TouchableOpacity 
+			style={[styles.button, styleBtn]}
+			onPress={onPress}>
 			<Text style={[styles.text, styleTextBtn]}>{text}</Text>
 		</TouchableOpacity>
 	);
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 30
 	}
-	
 });
 
 export default DeckView;
