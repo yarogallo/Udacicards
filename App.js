@@ -1,23 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DeckListView from './components/DeckListView';
+
+const data = [
+	{title: 'react', nroCards: 20},
+	{title: 'redux', nroCards: 2},
+	{title: 'react-native', nroCards: 10},
+	{title: 'angular', nroCards: 6},
+];
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View style={{flex: 1}}>
+        <DeckListView deckList={data}/>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
