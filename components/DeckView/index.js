@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { 
 	red,
-	yellow
+	yellow,
+	light
  } from '../../helper/colors';
  import TextButton from '../TextButton';
 
 class DeckView extends Component {
+	constructor(props) {
+		super(props);
+		this.navigateToAddDeckView = this.navigateToAddDeckView.bind(this);
+	}
+	navigateToAddDeckView() {
+		this.props.navigation.navigate('AddCardView');
+	}
 	render() {
 		return(
 			<View style={styles.container}>
@@ -15,7 +23,10 @@ class DeckView extends Component {
 					<Text style={styles.textCounter}>Nro cards</Text>
 				</View>
 				<View>
-					<TextButton text="Add Card" styleBtn={styles.addCardBtn} styleTextBtn={styles.textBtn}/>
+					<TextButton text="Add Card" 
+						styleBtn={styles.addCardBtn} 
+						styleTextBtn={styles.textBtn}
+						onPress={this.navigateToAddDeckView}/>
 					<TextButton text="Start Quiz" styleBtn={styles.addCardBtn} styleTextBtn={styles.textBtn}/>
 				</View>
 				
@@ -28,7 +39,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'space-around',
-		padding: 15
+		padding: 15,
+		backgroundColor: light
 	},
 	textTitle: {
 		color: red,

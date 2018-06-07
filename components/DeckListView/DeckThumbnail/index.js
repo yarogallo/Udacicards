@@ -11,7 +11,7 @@ function DeckThumbnail(props) {
 	const { item } = deck;
 	
 	return(
-		<TouchableOpacity style={styles.thumbnailDeck} onPress={() => {}}>
+		<TouchableOpacity style={styles.thumbnailDeck} onPress={onPress}>
 			<View style={{alignSelf: 'center',marginRight: 10}}>
 				<Text style={styles.cardTitle}>{item.title}</Text>
 				<Text style={styles.cardCounter}>{item.nroCards} Cards</Text>

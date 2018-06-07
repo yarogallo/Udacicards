@@ -1,23 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DeckListView from './components/DeckListView';
-import DeckView from './components/DeckView';
-import AddDeckView from './components/AddDeckView';
-import AddCardView from './components/AddCardView';
-
-const data = [
-	{title: 'react', nroCards: 20},
-	{title: 'redux', nroCards: 2},
-	{title: 'react-native', nroCards: 10},
-	{title: 'angular', nroCards: 6},
-];
+import { View } from 'react-native';
+import StackNavigator from './components/StackNavigator';
+import { TabNavigatorIos } from './components/TabNavigator';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <AddCardView />
-      </View>
+        <StackNavigator />
+      </View>     
     );
   }
 }

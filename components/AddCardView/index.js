@@ -10,8 +10,8 @@ import {
 } from '../../helper/colors';
 
 class AddCardView extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			question: 'Enter the question',
 			answer: 'Enter the answer',
@@ -74,7 +74,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		padding: 15,
 		justifyContent: 'center',
-		alignItems: 'center'	
+		alignItems: 'center',
+		backgroundColor: light	
 	},
 	inputText: {
 		color: green,

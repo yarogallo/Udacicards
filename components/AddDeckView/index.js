@@ -36,7 +36,6 @@ class AddDeckView extends Component {
 				keyboardVerticalOffset={5}>
 				<Text style={styles.text}>Enter title of your new deck:</Text>
 				<TextInput
-					autoFocus={true}
 					style={styles.inputForm}
 					value={this.state.value}
 					onChangeText={ text => this.changeValueHandler(text)}
