@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 	button: {
 		borderWidth: 2,
 		borderRadius: 7,
-		padding: 20
+		padding: 20,
 	},
 	text: {
 		textAlign: 'center',

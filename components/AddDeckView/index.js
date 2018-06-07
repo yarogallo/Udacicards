@@ -23,6 +23,9 @@ class AddDeckView extends Component {
 		this.setState({
 			value: ''
 		});
+		//check that the input is not empty
+		//add the deck to data base
+		//navigate to default view
 	}
 	render() {
 		return(
@@ -64,8 +67,10 @@ const styles = StyleSheet.create({
 	},
 	inputForm: {
 		borderColor: blue,
-		borderWidth: 2,
-		padding: 25,
+		borderWidth: 1,
+		height: 60,
+		padding: 10,
+		fontSize: 20,
 		marginBottom: 20,
 		borderRadius: 7
 	},
