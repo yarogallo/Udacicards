@@ -11,9 +11,13 @@ class DeckView extends Component {
 	constructor(props) {
 		super(props);
 		this.navigateToAddDeckView = this.navigateToAddDeckView.bind(this);
+		this.navigateToQuizView = this.navigateToQuizView.bind(this);
 	}
 	navigateToAddDeckView() {
 		this.props.navigation.navigate('AddCardView');
+	}
+	navigateToQuizView() {
+		this.props.navigation.navigate('QuizView');
 	}
 	render() {
 		return(
@@ -24,10 +28,14 @@ class DeckView extends Component {
 				</View>
 				<View>
 					<TextButton text="Add Card" 
-						styleBtn={styles.addCardBtn} 
+						styleBtn={styles.deckBtn} 
 						styleTextBtn={styles.textBtn}
 						onPress={this.navigateToAddDeckView}/>
-					<TextButton text="Start Quiz" styleBtn={styles.addCardBtn} styleTextBtn={styles.textBtn}/>
+					<TextButton 
+						text="Start Quiz" 
+						styleBtn={styles.deckBtn} 
+						styleTextBtn={styles.textBtn}
+						onPress={this.navigateToQuizView}/>
 				</View>
 				
 			</View>
@@ -39,6 +47,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'space-around',
+		alignItems: 'center',
 		padding: 15,
 		backgroundColor: light
 	},
@@ -53,10 +62,11 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		textAlign: 'center'
 	},
-	addCardBtn: {
+	deckBtn: {
 		marginBottom: 20,
 		borderColor: red,
-		backgroundColor: red
+		backgroundColor: red,
+		width: 350,
 	},
 	textBtn: {
 		color: yellow

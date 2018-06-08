@@ -13,8 +13,8 @@ class AddCardView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			question: 'Enter the question',
-			answer: 'Enter the answer',
+			question: 'Ex: What is a component',
+			answer: 'Components are like javascrit functions ...',
 		};
 		this.onChangeTextHandler = this.onChangeTextHandler.bind(this);
 		this.resetAnswer = this.resetAnswer.bind(this);
@@ -45,20 +45,24 @@ class AddCardView extends Component {
 				style={styles.container}
 				behavior="padding" 
 				enabled>
-				<TextInput
-					style={styles.inputText}
-					value={this.state.question}
-					name="question"
-					multiline={true}
-					onChange={ evt => this.onChangeTextHandler(evt)}
-					onFocus={this.resetQuestion}/>
-				<TextInput
-					style={styles.inputText}
-					value={this.state.answer}
-					multiline={true}
-					name="answer"
-					onChange={ evt => this.onChangeTextHandler(evt)}
-					onFocus={this.resetAnswer}/>
+				<View>
+					<Text style={styles.label}>Enter the question</Text>
+					<TextInput
+						style={styles.inputText}
+						value={this.state.question}
+						name="question"
+						multiline={true}
+						onChange={ evt => this.onChangeTextHandler(evt)}
+						onFocus={this.resetQuestion}/>
+					<Text style={styles.label}>Enter the answer</Text>	
+					<TextInput
+						style={styles.inputText}
+						value={this.state.answer}
+						multiline={true}
+						name="answer"
+						onChange={ evt => this.onChangeTextHandler(evt)}
+						onFocus={this.resetAnswer}/>
+				</View>
 				<TextButton
 					text="Submit"
 					styleBtn={styles.submitBtn}
@@ -73,8 +77,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 15,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: 'space-around',
+		alignItems: 'stretch',
 		backgroundColor: light	
 	},
 	inputText: {
@@ -85,16 +89,26 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderColor: blue,
 		borderRadius: 7,
-		marginBottom: 20,
-		alignSelf: 'stretch'	
+		marginBottom: 15,
 	},
 	submitBtn: {
 		backgroundColor: blue,
 		borderColor: blue,
-		width: 200
+		width: 200,
+		alignSelf: 'center'
 	},
 	textBtn: {
 		color: green
+	},
+	label: {
+		color: red,
+		fontSize: 20,
+		fontWeight: '800',
+		marginBottom: 10,
+		textDecorationColor: red,
+		textDecorationStyle: 'solid',
+		textDecorationLine: 'underline',
+		textAlign: 'center'
 	}
 });
 

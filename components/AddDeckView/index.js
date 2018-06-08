@@ -4,7 +4,8 @@ import TextButton from '../TextButton';
 import { 
 	green,
 	blue,
-	light
+	light,
+	red
  } from '../../helper/colors';
 
 class AddDeckView extends Component {
@@ -35,12 +36,14 @@ class AddDeckView extends Component {
 				behavior="padding" 
 				enable={true}
 				keyboardVerticalOffset={5}>
-				<Text style={styles.text}>Enter title of your new deck:</Text>
-				<TextInput
-					style={styles.inputForm}
-					value={this.state.value}
-					onChangeText={ text => this.changeValueHandler(text)}
-				/>
+				<View>
+					<Text style={styles.text}>Enter title of your new deck:</Text>
+					<TextInput
+						style={styles.inputForm}
+						value={this.state.value}
+						onChangeText={ text => this.changeValueHandler(text)}
+					/>
+				</View>
 				<TextButton 
 					text="Submit" 
 					styleBtn={styles.submitBtn}
@@ -54,17 +57,19 @@ class AddDeckView extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'stretch',
 		padding: 15,
 		backgroundColor: light
 	},
 	text: {
-		color: green,
-		fontSize: 30,
-		fontWeight: '100',
+		color: red,
+		fontSize: 20,
+		fontWeight: '800',
 		marginBottom: 30,
-		textAlign: 'center'
+		textAlign: 'center',
+		textDecorationStyle: 'solid',
+		textDecorationLine: 'underline',
 	},
 	inputForm: {
 		borderColor: blue,
@@ -78,7 +83,8 @@ const styles = StyleSheet.create({
 	submitBtn: {
 		backgroundColor: blue,
 		borderColor: blue,
-		width: 200
+		width: 200,
+		alignSelf: 'center'
 	},
 	textBtn: {
 		color: green

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { green } from '../../helper/colors';
 
 function DeckView(props) {
 	const { text, onPress, styleBtn, styleTextBtn } = props;
@@ -17,6 +18,12 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 7,
 		padding: 20,
+		shadowColor: green,
+		shadowOffset: {
+			width: 2,
+			height: 2
+		},
+		shadowOpacity: 0.2
 	},
 	text: {
 		textAlign: 'center',

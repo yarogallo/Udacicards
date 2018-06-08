@@ -4,6 +4,7 @@ import DeckListView from '../DeckListView';
 import DeckView from '../DeckView';
 import AddCardView from '../AddCardView';
 import TabNavigator from '../TabNavigator';
+import QuizView from '../QuizView';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation';
 import { light, green } from '../../helper/colors';
@@ -41,6 +42,9 @@ function HeaderImg(props) {
 	 },
 	 AddCardView: {
 	   screen: AddCardView
+	 },
+	 QuizView: {
+		 screen: QuizView
 	 }
   }, {
 	initialRouteName: 'Home',
