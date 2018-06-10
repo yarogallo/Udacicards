@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView } from 'react-native';
 import TextButton from '../TextButton';
+import { connect } from 'react-redux';
+import { addDeck } from '../../actions';
 import { 
 	green,
 	blue,
 	light,
 	red
  } from '../../helper/colors';
+ import { saveDeckTitle } from '../../helper/api';
 
 class AddDeckView extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			value: ''
 		};
 		this.submitDeckTitle = this.submitDeckTitle.bind(this);
+		this.resetValue = this.resetValue.bind(this);
 	}
 	changeValueHandler(value) {
 		this.setState(() => {
 			return {value};
 		});
 	}
-	submitDeckTitle() {
+	resetValue() {
 		this.setState({
 			value: ''
 		});
-		//check that the input is not empty
-		//add the deck to data base
-		//navigate to default view
+	}
+	submitDeckTitle() {
+		const { value } = this.state;
+		if(this.state.value.length !== 0){
+			saveDeckTitle(value);
+			this.props.dispatch(addDeck(this.state.value));
+			this.resetValue();
+		}
 	}
 	render() {
 		return(
@@ -91,4 +100,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AddDeckView;
+export default connect()(AddDeckView);

@@ -19,6 +19,7 @@ class AddCardView extends Component {
 		this.onChangeTextHandler = this.onChangeTextHandler.bind(this);
 		this.resetAnswer = this.resetAnswer.bind(this);
 		this.resetQuestion = this.resetQuestion.bind(this);
+		this.submitNewCard = this.submitNewCard.bind(this);
 	}
 	
 	onChangeTextHandler(evt) {
@@ -67,6 +68,7 @@ class AddCardView extends Component {
 					text="Submit"
 					styleBtn={styles.submitBtn}
 					styleTextBtn={styles.textBtn}
+					onPress={this.submitNewCard}
 				/>
 			</KeyboardAvoidingView>
 		);

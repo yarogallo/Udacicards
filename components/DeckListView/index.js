@@ -1,34 +1,45 @@
 import React, { Component} from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import DeckThumbnail from './DeckThumbnail';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { green, light } from '../../helper/colors';
-
-const data = [
-	{title: 'react', nroCards: 20},
-	{title: 'redux', nroCards: 2},
-	{title: 'react-native', nroCards: 10},
-	{title: 'angular', nroCards: 6},
-];
+import { getDecks } from '../../helper/api';
+import ThumbnailList from './ThumbnailList';
+import { connect } from 'react-redux';
+import { setInitialDecks } from '../../actions';
 
 class DeckListView extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			loading: true,
+		};
 		this.navigateToDeckView = this.navigateToDeckView.bind(this);
 	}
-	navigateToDeckView(){
-		return this.props.navigation.navigate('DeckView');
+	
+	componentDidMount() {
+		getDecks()
+		.then(result => {
+			this.props.dispatch(setInitialDecks(result));
+			this.setState({
+				loading: false
+			});
+		});
+	}
+	
+	navigateToDeckView(deck, nroCards){
+		this.props.navigation.navigate('DeckView', { deck, nroCards });
 	}
 	
 	render() {
-		const { deckList } = {deckList: data};
+		const { deckListThumnail } = this.props;
+		const { loading } = this.state;
 		return(
 			<View style={styles.container}>
-				<FlatList
-					data={deckList}
-					keyExtractor={ deck => deck.title }
-					renderItem={ deck => <DeckThumbnail deck={deck} onPress={this.navigateToDeckView}/> }
-					ItemSeparatorComponent={ () => <View style={{height: 1, backgroundColor: green}}/> }
-				/>
+			   {loading
+				? <ActivityIndicator size="large" color={green}/>
+				: <ThumbnailList 
+					deckListThumnail={deckListThumnail} 
+					onPressListDeck={this.navigateToDeckView}
+					/>}
 			</View>
 		);
 	}
@@ -43,4 +54,16 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default DeckListView;
+function mapStateToProps(state) {
+	const deckListThumnail = Object.keys(state).reverse().map( key => {
+		return {
+			title: state[key].title,
+			nroCards: state[key].questions.length
+		};
+	});
+	return {
+		deckListThumnail,
+	};
+}
+
+export default connect(mapStateToProps)(DeckListView);

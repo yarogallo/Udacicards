@@ -10,21 +10,29 @@ import {
 class DeckView extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			deckTitle: this.props.navigation.getParam('deck', 'no_deck'),
+			deckNroCards: this.props.navigation.getParam('nroCards', 0)	
+		};
 		this.navigateToAddDeckView = this.navigateToAddDeckView.bind(this);
 		this.navigateToQuizView = this.navigateToQuizView.bind(this);
 	}
+	
 	navigateToAddDeckView() {
 		this.props.navigation.navigate('AddCardView');
 	}
+	
 	navigateToQuizView() {
 		this.props.navigation.navigate('QuizView');
 	}
+	
 	render() {
+		const { deckTitle, deckNroCards } = this.state;
 		return(
 			<View style={styles.container}>
 				<View>
-					<Text style={styles.textTitle}>Deck Name</Text>
-					<Text style={styles.textCounter}>Nro cards</Text>
+					<Text style={styles.textTitle}>{deckTitle}</Text>
+					<Text style={styles.textCounter}>{deckNroCards} Cards</Text>
 				</View>
 				<View>
 					<TextButton text="Add Card" 
