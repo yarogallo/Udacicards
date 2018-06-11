@@ -1,4 +1,8 @@
-import { ADD_DECK, SET_INITIAL_DECKS } from '../actions';
+import { 
+	ADD_DECK, 
+	SET_INITIAL_DECKS,
+	ADD_CARD_TO_DECK
+ } from '../actions';
 
 const initialState = {};
 
@@ -16,7 +20,15 @@ export function reducer(state = initialState, action) {
 			return {
 				...state,
 				...action.decks
-			}	
+			}
+		case ADD_CARD_TO_DECK: 
+			return {
+				...state,
+				[action.title]: {
+					...state[action.title],
+					questions: [...state[action.title].questions, action.card]
+				}
+			}		
 		default:
 			return state;
 	}

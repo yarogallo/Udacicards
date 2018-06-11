@@ -13,7 +13,7 @@ export default class App extends React.Component {
       <Provider store={deckStore}>
           <View style={{flex: 1}}>
             <CustomStatusBar backgroundColor={light} barStyle="light-content"/>
-            <StackNavigator />
+            <StackNavigator screenProps={2}/>
           </View>  
       </Provider>   
     );

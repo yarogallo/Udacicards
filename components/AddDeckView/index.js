@@ -58,6 +58,7 @@ class AddDeckView extends Component {
 					styleBtn={styles.submitBtn}
 					styleTextBtn={styles.textBtn}
 					onPress={this.submitDeckTitle}/>
+				<View style={{ height: 60 }} />
 			</KeyboardAvoidingView>
 		);
 	}

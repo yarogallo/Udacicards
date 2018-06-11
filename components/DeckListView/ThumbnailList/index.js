@@ -9,9 +9,8 @@ import {
 
 function DeckThumbnail({ deck, onPressItem }) {
 	const { item } = deck;
-	
 	return(
-		<TouchableOpacity style={styles.thumbnailDeck} onPress={() => onPressItem(item.title, item.nroCards)}>
+		<TouchableOpacity style={styles.thumbnailDeck} onPress={() => onPressItem(item.title)}>
 			<View style={{alignSelf: 'center',marginRight: 10}}>
 				<Text style={styles.cardTitle}>{item.title}</Text>
 				<Text style={styles.cardCounter}>{item.nroCards} Cards</Text>

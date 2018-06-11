@@ -25,8 +25,8 @@ class DeckListView extends Component {
 		});
 	}
 	
-	navigateToDeckView(deck, nroCards){
-		this.props.navigation.navigate('DeckView', { deck, nroCards });
+	navigateToDeckView(deck){
+		this.props.navigation.navigate('DeckView', { deck });
 	}
 	
 	render() {

@@ -26,15 +26,16 @@ export const saveDeckTitle = function(title) {
 		.catch(err => reportErr(err));
 };
 
-// export const addCardToDeck = function(title, card) {
-// 	return AsyncStorage.getItem(DECKS)
-// 			.then( result => {
-// 				const tmp = JSON.parse(result);
-// 				tmp[title].questions.push(card);
-// 				AsyncStorage.setItem(DECKS, JSON.stringify(tmp));
-// 			})
-// 			.catch(err => reportErr(err));
-// };
+export const addCard = function(title, card) {
+	 return AsyncStorage.getItem(DECKS)
+			.then( result => {
+				let res = JSON.parse(result);
+				res[title].questions.push(card);
+				return AsyncStorage.setItem(DECKS, JSON.stringify(res))
+						.catch(err => reportErr(err));
+			})
+			.catch(err => reportErr(err));
+};
 
 // export const getDeck = function(title) {
 // 	AsyncStorage.getItem(title)

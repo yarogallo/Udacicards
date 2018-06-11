@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { 
 	red,
 	yellow,
@@ -10,16 +11,16 @@ import {
 class DeckView extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			deckTitle: this.props.navigation.getParam('deck', 'no_deck'),
-			deckNroCards: this.props.navigation.getParam('nroCards', 0)	
-		};
 		this.navigateToAddDeckView = this.navigateToAddDeckView.bind(this);
 		this.navigateToQuizView = this.navigateToQuizView.bind(this);
 	}
 	
-	navigateToAddDeckView() {
-		this.props.navigation.navigate('AddCardView');
+	componentDidMount() {
+		
+	}
+	
+	navigateToAddDeckView(deck) {
+		this.props.navigation.navigate('AddCardView', { deck });
 	}
 	
 	navigateToQuizView() {
@@ -27,7 +28,7 @@ class DeckView extends Component {
 	}
 	
 	render() {
-		const { deckTitle, deckNroCards } = this.state;
+		const { deckTitle, deckNroCards }= this.props;
 		return(
 			<View style={styles.container}>
 				<View>
@@ -38,9 +39,9 @@ class DeckView extends Component {
 					<TextButton text="Add Card" 
 						styleBtn={styles.deckBtn} 
 						styleTextBtn={styles.textBtn}
-						onPress={this.navigateToAddDeckView}/>
+						onPress={() => this.navigateToAddDeckView(deckTitle)}/>
 					<TextButton 
-						text="Start Quiz" 
+						text="Start Quiz"
 						styleBtn={styles.deckBtn} 
 						styleTextBtn={styles.textBtn}
 						onPress={this.navigateToQuizView}/>
@@ -82,4 +83,12 @@ const styles = StyleSheet.create({
 	
 });
 
-export default DeckView;
+function mapStateToProps(state, { navigation }) {
+	const title = navigation.getParam('deck', 'no_deck')
+	return {
+		deckTitle : title,
+		deckNroCards: state[title].questions.length
+	}
+}
+
+export default connect(mapStateToProps)(DeckView);

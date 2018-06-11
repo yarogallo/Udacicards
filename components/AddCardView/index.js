@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {View, Text, KeyboardAvoidingView, StyleSheet, TextInput} from 'react-native';
+import { connect } from 'react-redux';
+import { addCard } from '../../helper/api';
 import TextButton from '../TextButton';
+import { addCardTodDeck } from '../../actions';
 import {
 	light,
 	red,
-	yellow,
 	blue,
 	green
 } from '../../helper/colors';
@@ -13,22 +15,38 @@ class AddCardView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			question: 'Ex: What is a component',
-			answer: 'Components are like javascrit functions ...',
+			question: '',
+			answer: '',
+			title: this.props.navigation.getParam('deck', 'no_deck')
 		};
-		this.onChangeTextHandler = this.onChangeTextHandler.bind(this);
 		this.resetAnswer = this.resetAnswer.bind(this);
 		this.resetQuestion = this.resetQuestion.bind(this);
 		this.submitNewCard = this.submitNewCard.bind(this);
+		this.resetState = this.resetState.bind(this);
+		this.onChangeQuestionHandler = this.onChangeQuestionHandler.bind(this);
+		this.onChangeAnswerHandler = this.onChangeAnswerHandler.bind(this);
 	}
 	
-	onChangeTextHandler(evt) {
-		const name = evt.target.name;
-		const value = evt.target.value;
-		this.setState( () => ({[name]: value}));
+	onChangeQuestionHandler(value) {
+		this.setState( () => ({question: value}));
+	}
+	onChangeAnswerHandler(value) {
+		this.setState( () => ({answer: value}));
+	}
+	resetState() {
+		this.setState({ question: '', answer: ''});
 	}
 	submitNewCard() {
-		this.setState({ question: '', answer: ''});
+		const { title, question, answer } = this.state;
+		const card = {question, answer};
+		if(question.length === 0 || answer.length === 0) {
+			return;
+		}
+		addCard(title, card)
+			.then(() => {
+				this.resetState();
+				return this.props.dispatch(addCardTodDeck(title, card))	
+			});		
 	} 
 	resetAnswer() {
 		this.setState({
@@ -52,24 +70,25 @@ class AddCardView extends Component {
 						style={styles.inputText}
 						value={this.state.question}
 						name="question"
-						multiline={true}
-						onChange={ evt => this.onChangeTextHandler(evt)}
+						multiline={false}
+						onChangeText={ value => this.onChangeQuestionHandler(value)}
 						onFocus={this.resetQuestion}/>
 					<Text style={styles.label}>Enter the answer</Text>	
 					<TextInput
 						style={styles.inputText}
 						value={this.state.answer}
-						multiline={true}
+						multiline={false}
 						name="answer"
-						onChange={ evt => this.onChangeTextHandler(evt)}
+						onChangeText={ value => this.onChangeAnswerHandler(value)}
 						onFocus={this.resetAnswer}/>
 				</View>
 				<TextButton
 					text="Submit"
 					styleBtn={styles.submitBtn}
 					styleTextBtn={styles.textBtn}
-					onPress={this.submitNewCard}
+					onPress={() => this.submitNewCard()}
 				/>
+				<View style={{ height: 60 }} />
 			</KeyboardAvoidingView>
 		);
 	}	
@@ -114,4 +133,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default AddCardView;
+export default connect()(AddCardView);
