@@ -1,10 +1,8 @@
 import React from 'react';
-import { createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-import { Platform } from 'react-native';
+import { createMaterialTopTabNavigator } from 'react-navigation';
 import AddDeckView from '../AddDeckView';
 import DeckListView from '../DeckListView';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { red, yellow, green, light } from '../../helper/colors';
+import { red, green, light } from '../../helper/colors';
 
  const TabNavigator = createMaterialTopTabNavigator({
 	Home: {
@@ -20,6 +18,7 @@ import { red, yellow, green, light } from '../../helper/colors';
 		}
 	}
 }, {
+	title: 'deck',
 	animationEnabled: true,
 	tabBarPosition: 'top',
 	tabBarOptions: {
@@ -29,18 +28,11 @@ import { red, yellow, green, light } from '../../helper/colors';
 		showIcon: false,
 		labelStyle: {
 			fontSize: 20,
-			fontWeight: 'bold',
+			fontWeight: '500',
 		},
 		style: {
 			height: 60,
 			backgroundColor: light,
-			shadowColor: green,
-			shadowOffset: {
-				width: 0,
-				height: 2
-			},
-			shadowOpacity: 0.2,
-			shadowRadius: 2	
 		}
 	}
 });

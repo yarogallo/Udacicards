@@ -4,7 +4,7 @@ import TextButton from '../TextButton';
 import { connect } from 'react-redux';
 import { addDeck } from '../../actions';
 import { 
-	green,
+	yellow,
 	blue,
 	light,
 	red
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center'
 	},
 	textBtn: {
-		color: green
+		color: yellow
 	}
 });
 

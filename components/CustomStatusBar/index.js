@@ -2,7 +2,6 @@ import React from 'react';
 import { View, StatusBar, StyleSheet } from 'react-native';
 import { Constants } from 'expo';
 
-
 function CustomStatusBar({ backgroundColor, ...props }) {
 	return(
 		<View style={[styles.viewStyle, { backgroundColor: backgroundColor }]}>

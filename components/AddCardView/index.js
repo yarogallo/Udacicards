@@ -8,7 +8,8 @@ import {
 	light,
 	red,
 	blue,
-	green
+	green,
+	yellow
 } from '../../helper/colors';
 
 class AddCardView extends Component {
@@ -25,6 +26,12 @@ class AddCardView extends Component {
 		this.resetState = this.resetState.bind(this);
 		this.onChangeQuestionHandler = this.onChangeQuestionHandler.bind(this);
 		this.onChangeAnswerHandler = this.onChangeAnswerHandler.bind(this);
+	}
+	
+	static navigationOptions({ navigation }) {
+		return {
+			title: 'Add Card',
+		};
 	}
 	
 	onChangeQuestionHandler(value) {
@@ -119,7 +126,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'center'
 	},
 	textBtn: {
-		color: green
+		color: yellow
 	},
 	label: {
 		color: red,

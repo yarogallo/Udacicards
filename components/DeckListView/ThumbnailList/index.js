@@ -12,7 +12,8 @@ function DeckThumbnail({ deck, onPressItem }) {
 	return(
 		<TouchableOpacity style={styles.thumbnailDeck} onPress={() => onPressItem(item.title)}>
 			<View style={{alignSelf: 'center',marginRight: 10}}>
-				<Text style={styles.cardTitle}>{item.title}</Text>
+				<Text style={styles.cardTitle}>
+					{item.title}</Text>
 				<Text style={styles.cardCounter}>{item.nroCards} Cards</Text>
 			</View>
 			<View style={{alignSelf: "center"}}>

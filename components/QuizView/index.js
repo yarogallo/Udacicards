@@ -4,24 +4,33 @@ import { Button } from 'react-native-elements';
 import TextButton from '../TextButton';
 import { connect } from 'react-redux';
 import { red, green, light } from '../../helper/colors';
-import QuizEnd from './QuizEnd';
+import QuizEndView from './QuizEndView';
 
 class QuizView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			currentIndex: 0,
-			correctQuestion: 0,
-			showAnswer: false
+			correctQuestions: 0,
+			showAnswer: false,
 		};
 		this.pressCorrectButtonHandler = this.pressCorrectButtonHandler.bind(this);
 		this.toggleAnswearHandler = this.toggleAnswearHandler.bind(this);
 		this.pressButtonHandler = this.pressButtonHandler.bind(this);
+		this.navigateBackToDeck = this.navigateBackToDeck.bind(this);
+		this.restartQuiz = this.restartQuiz.bind(this);
+	}
+	
+	static navigationOptions() {
+		return {
+			title: 'quiz',
+			headerBackTitle: null
+		};
 	}
 	
 	pressCorrectButtonHandler() {
 		this.setState({
-			correctQuestion: this.state.correctQuestion + 1,
+			correctQuestions: this.state.correctQuestions + 1,
 		});
 	}
 	
@@ -38,29 +47,44 @@ class QuizView extends Component {
 		}));
 	}
 	
+	navigateBackToDeck() {
+		this.props.navigation.navigate('DeckView', { deck: this.props.title });
+	}
+	
+	restartQuiz() {
+		this.setState({
+			currentIndex: 0,
+			showAnswer: false,
+		});
+	}
+	
 	render() {
-		const { listQuestions } = this.props;
-		const { currentIndex, showAnswer, correctQuestion } = this.state;
+		const { listQuestions, title } = this.props;
+		const { currentIndex, showAnswer, correctQuestions } = this.state;
 		const totalQuestions = listQuestions.length;
 		return(
 			<View style={styles.container}>
 			{ currentIndex === totalQuestions
-				? <QuizEnd totalQuestions={totalQuestions} totalCorrectQuestions={correctQuestion}/>
+				? <QuizEndView 
+					totalQuestions={totalQuestions} 
+					correctQuestions={correctQuestions} 
+					deck={title}
+					backToDeck={this.navigateBackToDeck}
+					restartQuiz={this.restartQuiz}/>
 				:<View style={styles.container}>
 					<View style={{marginBottom: 20}}>
 						<Text style={styles.quizCounter}>{`${currentIndex + 1}/${totalQuestions}`}</Text>
 					</View>
-					<View style={{marginBottom: 40}}>
-						<Text style={styles.headerText}>Question</Text>
-						<Text style={styles.questionText}>{listQuestions[currentIndex].question}</Text>
+					<View style={{marginBottom: 40}}>	
+						<Text style={styles.text}>{
+							showAnswer ? listQuestions[currentIndex].answer : listQuestions[currentIndex].question
+						}</Text>
 					</View>
 					<View style={{marginBottom: 40}}>
 						<Button 
-							title="answer here:"
+							title={ showAnswer ? 'question' : 'answer'}
 							textStyle={[styles.headerText, {
-								textDecorationColor: red,
-								textDecorationStyle: "solid",
-								textDecorationLine: "underline"
+								textDecorationColor: red
 							}]}
 							raised= {true}
 							buttonStyle={{
@@ -68,13 +92,11 @@ class QuizView extends Component {
 							}}
 							containerStyle={{ marginTop: 20 }}
 							onPress={this.toggleAnswearHandler}/>
-						{ showAnswer && <Text style={styles.questionText}>{listQuestions[currentIndex].answer}</Text>}
-						
 					</View>
 					<View>
 						<TextButton 
 							text="Correct" 
-							styleBtn={[styles.quizBtn, {backgroundColor: red, marginBottom: 20}]} 
+							styleBtn={[styles.quizBtn, {backgroundColor: green, marginBottom: 20}]} 
 							styleTextBtn={styles.textBtn}
 							onPress={() => {
 								this.pressButtonHandler();
@@ -82,7 +104,7 @@ class QuizView extends Component {
 							}}/>
 						<TextButton 
 							text="Incorrect" 
-							styleBtn={[styles.quizBtn, {backgroundColor: green}]} 
+							styleBtn={[styles.quizBtn, {backgroundColor: red}]} 
 							styleTextBtn={styles.textBtn}
 							onPress={() => {
 								this.pressButtonHandler();	
@@ -114,15 +136,16 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		textAlign: 'center'
 	},
-	questionText: {
+	text: {
 		color: green,
 		fontSize: 30,
-		fontWeight: 'normal',
+		fontWeight: '700',
+		textAlign: 'center'
 	},
 	quizBtn: {
 		alignSelf: 'stretch',
-		borderColor: light,
-		width: 350,
+		borderColor: 'transparent',
+		width: 250,
 		alignSelf: 'center'
 	},
 	textBtn: {
@@ -134,6 +157,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state, { navigation }) {
 	const title = navigation.getParam('deck');
 	return {
+		title,
 		listQuestions: [...state[title].questions]
 	};
 }

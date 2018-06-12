@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 
 function TextButton(props) {
 	const { text, onPress, styleBtn, styleTextBtn, disabled } = props;
-	const customStyle = disabled ? [styles.button, styleBtn] : [styles.button, styles.shadow, styleBtn];
+	const customStyle = disabled ? styles.disabled : styles.enabled;
 	return(
 		<TouchableOpacity 
-			style={customStyle}
+			style={[styles.button, customStyle, styleBtn] }
 			onPress={onPress}
 			disabled={disabled}>
 			<Text style={[styles.text, styleTextBtn]}>{text}</Text>
@@ -21,9 +21,12 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		borderRadius: 7,
 		padding: 20,
+	},
+	disabled: {
 		opacity: 0.5
 	},
-	shadow: {
+	enabled: {
+		opacity: 1,
 		shadowColor: green,
 		shadowOffset: {
 			width: 2,

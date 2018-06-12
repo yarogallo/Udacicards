@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet, Platform } from 'react-native';
-import DeckListView from '../DeckListView';
 import DeckView from '../DeckView';
 import AddCardView from '../AddCardView';
 import TabNavigator from '../TabNavigator';
 import QuizView from '../QuizView';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from 'react-navigation';
-import { light, green } from '../../helper/colors';
+import { light, green, black } from '../../helper/colors';
 
 const styles = StyleSheet.create({
 	header: {
@@ -32,10 +31,16 @@ function HeaderImg(props) {
   
   const StackNavigator = createStackNavigator({
 	 Home: {
-	   screen: TabNavigator,
-	   navigationOptions: {
-		   header: null
-	   }
+		 screen: TabNavigator,
+		 navigationOptions: {
+			 title: 'Udacicards',
+			 headerBackTitle: null,
+			 headerTitleStyle: {
+				 fontWeight: '500',
+				 fontSize: 30,
+				 marginBottom: 10
+			 }
+		 }
 	 },
 	 DeckView: {
 	   screen: DeckView,
@@ -49,18 +54,14 @@ function HeaderImg(props) {
   }, {
 	initialRouteName: 'Home',
 	navigationOptions: {
-	  headerBackImage: () =>  <HeaderImg tintColor={green}/>,
-	  headerStyle: {
-		backgroundColor: light,
-		height: 60,
-		shadowColor: green,
-		shadowOffset: {
-		  width: 0,
-		  height: 2
+		headerBackImage: () =>  <HeaderImg tintColor={black}/>,
+		headerStyle: {
+			backgroundColor: light,
 		},
-		shadowOpacity: 0.2,
-		shadowRadius: 2      
-	  }
+		headerTitleStyle: {
+			fontSize: 20,
+		}, 
+		headerTintColor: black
 	},
 	headerMode: Platform.OS === 'ios' ? 'float': 'screen'
   });
