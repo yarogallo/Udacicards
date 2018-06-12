@@ -15,16 +15,12 @@ class DeckView extends Component {
 		this.navigateToQuizView = this.navigateToQuizView.bind(this);
 	}
 	
-	componentDidMount() {
-		
-	}
-	
 	navigateToAddDeckView(deck) {
 		this.props.navigation.navigate('AddCardView', { deck });
 	}
 	
-	navigateToQuizView() {
-		this.props.navigation.navigate('QuizView');
+	navigateToQuizView(deck) {
+		this.props.navigation.navigate('QuizView', { deck });
 	}
 	
 	render() {
@@ -44,7 +40,8 @@ class DeckView extends Component {
 						text="Start Quiz"
 						styleBtn={styles.deckBtn} 
 						styleTextBtn={styles.textBtn}
-						onPress={this.navigateToQuizView}/>
+						disabled={deckNroCards === 0 ? true: false}
+						onPress={() => this.navigateToQuizView(deckTitle)}/>
 				</View>
 				
 			</View>
