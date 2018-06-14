@@ -23,7 +23,7 @@ const localNotification  = {
 function schedulingOptions() {
 	const time = new Date();
 	time.setDate(time.getDate() + 1);
-	time.setHours(8);
+	time.setHours(20);
 	time.setMinutes(0);
 	time.setSeconds(0);
 	return {

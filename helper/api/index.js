@@ -38,12 +38,6 @@ export const addCard = function(title, card) {
 			.catch(err => reportErr(err));
 };
 
-// export const getDeck = function(title) {
-// 	AsyncStorage.getItem(title)
-// 	.then(result => JSON.parse(result))
-// 	.catch(err => reportErr(err));
-// };
-
 export function checkNotification() {
 	return AsyncStorage.getItem(NOTIFICATION_ID)
 			.then( result => JSON.parse(result));
