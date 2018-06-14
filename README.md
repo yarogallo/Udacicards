@@ -6,7 +6,7 @@ The application will allow users to create different categories of flashcards ca
 
 ## Up and running
 * Download the application [https://github.com/yarogallo/Udacicards](https://github.com/yarogallo/Udacicards).
-* Open a terminal and move inside the application directory and run `npm install` and `npm start`, then use Expo for open the application in a simulator or in an actual device. More info [here].(https://docs.expo.io/versions/v28.0.0/workflow/up-and-running).
+* Open a terminal and move inside the application directory and run `npm install` and `npm start`, then use Expo for open the application in a simulator or in an actual device. More info [here](https://docs.expo.io/versions/v28.0.0/workflow/up-and-running).
 
 ## Specifications
 * This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
