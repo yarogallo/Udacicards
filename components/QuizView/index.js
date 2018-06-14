@@ -80,8 +80,10 @@ class QuizView extends Component {
 	restartQuiz() {
 		this.setState({
 			currentIndex: 0,
+			correctQuestions: 0,
 			showAnswer: false,
 		});
+		this.performAnimation();
 	}
 	
 	render() {

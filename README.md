@@ -12,3 +12,4 @@ The application will allow users to create different categories of flashcards ca
 * This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 * Use Redux to handle the application state and AsyncStorage to persist user data.
 * Use react-navigation package to navigate the application.
+* The application was successfully tested in ios and android platforms.
