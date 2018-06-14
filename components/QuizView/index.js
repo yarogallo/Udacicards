@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform, Animated } from 'react-native';
 import { Button } from 'react-native-elements';
 import TextButton from '../TextButton';
 import { connect } from 'react-redux';
@@ -13,6 +13,7 @@ class QuizView extends Component {
 			currentIndex: 0,
 			correctQuestions: 0,
 			showAnswer: false,
+			bounce: new Animated.Value(0) 
 		};
 		this.pressCorrectButtonHandler = this.pressCorrectButtonHandler.bind(this);
 		this.toggleAnswearHandler = this.toggleAnswearHandler.bind(this);
@@ -28,6 +29,30 @@ class QuizView extends Component {
 		};
 	}
 	
+	componentDidMount() {
+		this.performAnimation();
+	}
+	
+	performAnimation() {
+		Animated.sequence([
+			Animated.timing(
+				this.state.bounce,
+				{
+					toValue: 1.5,
+					useNativeDriver: true
+				}
+			),
+			Animated.timing(
+				this.state.bounce,
+				{
+					toValue: 1,
+					useNativeDriver: true
+				}
+			),
+		]).start();
+	}
+	
+	
 	pressCorrectButtonHandler() {
 		this.setState({
 			correctQuestions: this.state.correctQuestions + 1,
@@ -39,6 +64,7 @@ class QuizView extends Component {
 			currentIndex: this.state.currentIndex + 1,
 			showAnswer: false,
 		});
+		this.performAnimation();
 	}
 	
 	toggleAnswearHandler() {
@@ -60,7 +86,7 @@ class QuizView extends Component {
 	
 	render() {
 		const { listQuestions, title } = this.props;
-		const { currentIndex, showAnswer, correctQuestions } = this.state;
+		const { currentIndex, showAnswer, correctQuestions, bounce } = this.state;
 		const totalQuestions = listQuestions.length;
 		return(
 			<View style={styles.container}>
@@ -80,19 +106,23 @@ class QuizView extends Component {
 							showAnswer ? listQuestions[currentIndex].answer : listQuestions[currentIndex].question
 						}</Text>
 					</View>
-					<View style={{marginBottom: 40}}>
+					<Animated.View style={{
+							marginBottom: 40,
+							transform: [{scale: bounce}]
+						}}>
 						<Button 
-							title={ showAnswer ? 'question' : 'answer'}
+							title={ showAnswer ? "question" : "answer"}
 							textStyle={[styles.headerText, {
 								textDecorationColor: red
 							}]}
-							raised= {true}
+							raised= { Platform.OS === "ios" ? true : false}
 							buttonStyle={{
-								backgroundColor: "transparent"
+								backgroundColor: "transparent",
+								borderColor: "transparent",
 							}}
 							containerStyle={{ marginTop: 20 }}
 							onPress={this.toggleAnswearHandler}/>
-					</View>
+					</Animated.View>
 					<View>
 						<TextButton 
 							text="Correct" 
@@ -125,7 +155,6 @@ const styles = StyleSheet.create({
 		alignItems: 'stretch'
 	},
 	quizCounter: {
-		color: green,
 		fontWeight: '500',
 		fontSize: 20
 	},
@@ -137,7 +166,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center'
 	},
 	text: {
-		color: green,
 		fontSize: 30,
 		fontWeight: '700',
 		textAlign: 'center'

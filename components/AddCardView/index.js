@@ -28,7 +28,7 @@ class AddCardView extends Component {
 		this.onChangeAnswerHandler = this.onChangeAnswerHandler.bind(this);
 	}
 	
-	static navigationOptions({ navigation }) {
+	static navigationOptions() {
 		return {
 			title: 'Add Card',
 		};
@@ -52,7 +52,8 @@ class AddCardView extends Component {
 		addCard(title, card)
 			.then(() => {
 				this.resetState();
-				return this.props.dispatch(addCardTodDeck(title, card))	
+				this.props.navigation.navigate('DeckView', {deck: title});
+				return this.props.dispatch(addCardTodDeck(title, card));
 			});		
 	} 
 	resetAnswer() {
@@ -110,7 +111,6 @@ const styles = StyleSheet.create({
 		backgroundColor: light	
 	},
 	inputText: {
-		color: green,
 		fontSize: 20,
 		borderWidth: 1,
 		height: 60,

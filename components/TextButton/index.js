@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 	},
 	enabled: {
 		opacity: 1,
-		shadowColor: green,
+		shadowColor: '#6c6c6c',
 		shadowOffset: {
 			width: 2,
 			height: 2

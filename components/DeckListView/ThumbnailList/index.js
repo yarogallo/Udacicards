@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, FlatList, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import React, {Component } from 'react';
+import { View, FlatList, Text, StyleSheet, TouchableOpacity, Platform, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import {
@@ -7,20 +7,58 @@ import {
 	red
 } from '../../../helper/colors';
 
-function DeckThumbnail({ deck, onPressItem }) {
-	const { item } = deck;
-	return(
-		<TouchableOpacity style={styles.thumbnailDeck} onPress={() => onPressItem(item.title)}>
-			<View style={{alignSelf: 'center',marginRight: 10}}>
-				<Text style={styles.cardTitle}>
-					{item.title}</Text>
-				<Text style={styles.cardCounter}>{item.nroCards} Cards</Text>
-			</View>
-			<View style={{alignSelf: "center"}}>
-				<Icon name="arrow-right" size={40} color={red}/>
-			</View>
-		</TouchableOpacity>
-	);
+class DeckThumbnail extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			fadeIn: new Animated.Value(0),
+			scale: new Animated.Value(0)	
+		};
+	}
+	componentDidMount() {
+		Animated.sequence([
+			Animated.timing(
+				this.state.fadeIn,
+				{
+					toValue: 1,
+					useNativeDriver: true
+				}
+			),
+			Animated.timing(
+				this.state.scale,
+				{
+					toValue: 1,
+					useNativeDriver: true
+				}
+			)
+		]).start();
+	}
+	render() {
+		const { deck, onPressItem } = this.props;
+		const { item } = deck;
+		const { fadeIn, scale } = this.state;
+		return(
+			<TouchableOpacity style={styles.thumbnailDeck} onPress={() => onPressItem(item.title)}>
+				<Animated.View style={{
+						alignSelf: 'center',
+						marginRight: 10,
+						opacity: fadeIn
+					}}>
+					<Text style={styles.cardTitle}>
+						{item.title}</Text>
+					<Text style={styles.cardCounter}>{item.nroCards} Cards</Text>
+				</Animated.View>
+				<Animated.View style={{
+						alignSelf: "center",
+						transform: [{
+							scale: scale
+						}]
+					}}>
+					<Icon name="arrow-right" size={40} color={red}/>
+				</Animated.View>
+			</TouchableOpacity>
+		);
+	}
 }
 
 
@@ -44,7 +82,7 @@ function ThumbnailList(props) {
 	);
 }
 
-const styles = {
+const styles = StyleSheet.create({
 	thumbnailDeck: {
 		flex: 1,
 		flexDirection: 'row',
@@ -71,6 +109,6 @@ const styles = {
 		alignItems: 'center'
 		
 	}
-}
+});
 
 export default ThumbnailList;

@@ -1,6 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
 const DECKS = 'DECKS';
+const NOTIFICATION_ID = 'NOTIFICATION_ID';
 
 function reportErr(err) {
 	console.error(err);
@@ -43,7 +44,15 @@ export const addCard = function(title, card) {
 // 	.catch(err => reportErr(err));
 // };
 
-// 	AsyncStorage.mergeItem(title, JSON.stringify(valueToMerge))
-// 	.then(result => !!result)
-// 	.catch(err => reportErr(err));
-// };
+export function checkNotification() {
+	return AsyncStorage.getItem(NOTIFICATION_ID)
+			.then( result => JSON.parse(result));
+}
+
+export function setNotificationId(localNotificationId) {
+	return AsyncStorage.setItem(NOTIFICATION_ID, JSON.stringify(localNotificationId))
+}
+
+export function removeNotification() {
+	return AsyncStorage.removeItem(NOTIFICATION_ID);
+}
