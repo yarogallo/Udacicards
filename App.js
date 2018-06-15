@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Provider } from 'react-redux';
 import StackNavigator from './components/StackNavigator';
@@ -8,7 +8,7 @@ import {light, green} from './helper/colors';
 import { setNotifications } from './helper/utils';
 
 
-export default class App extends React.Component {
+export default class App extends Component {
   componentDidMount() {
     setNotifications();
   }

@@ -32,10 +32,14 @@ class AddDeckView extends Component {
 	}
 	submitDeckTitle() {
 		const { value } = this.state;
+		const { navigate } = this.props.navigation;
 		if(this.state.value.length !== 0){
 			saveDeckTitle(value);
 			this.props.dispatch(addDeck(this.state.value));
 			this.resetValue();
+			navigate('DeckView', {
+				deck: value
+			});
 		}
 	}
 	render() {
